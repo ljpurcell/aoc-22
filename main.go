@@ -1,5 +1,7 @@
 package main
 
+import "aoc-22/Day2"
+
 func main() {
-    DayOnePartTwo()
+    day2.DayTwoPartOne()
 }
