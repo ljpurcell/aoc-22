@@ -7,10 +7,12 @@ import (
 	"strconv"
 )
 
+var data = "day1_data.txt"
+
 func DayOnePartOne() {
-	file, err := os.Open("day1_data.txt")
+	file, err := os.Open(data)
 	defer file.Close()
-	utils.CheckAndLog(err, "Could not open day1_data.txt")
+	utils.Check(err, "Could not open day1_data.txt")
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -21,7 +23,7 @@ func DayOnePartOne() {
 
 		if line != "" {
 			amount, err := strconv.ParseInt(line, 10, strconv.IntSize)
-			utils.CheckAndLog(err, "Could not parse int")
+			utils.Check(err, "Could not parse int")
 			currentElf += amount
 		} else {
 			if currentElf > maxElf {
@@ -31,5 +33,35 @@ func DayOnePartOne() {
 		}
 	}
 
-    println(maxElf)
+	println(maxElf)
+}
+
+func DayOnePartTwo() {
+	file, err := os.Open(data)
+	defer file.Close()
+	utils.Check(err, "Could not open day1_data.txt")
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+	maxElves := []int64{0, 0, 0}
+	var currentElf int64
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		if line != "" {
+			amount, err := strconv.ParseInt(line, 10, 64)
+			utils.Check(err, "Could not parse int")
+			currentElf += amount
+		} else {
+			minIdx, minAmt := utils.GetMinimums(maxElves)
+			if currentElf > minAmt {
+				maxElves[minIdx] = currentElf
+			}
+			currentElf = 0
+		}
+	}
+
+	sum := utils.Sum(maxElves)
+	println(sum)
 }
