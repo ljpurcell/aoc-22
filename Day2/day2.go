@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 var data = "Day2/day2_data.txt"
@@ -36,6 +37,37 @@ func DayTwoPartOne() {
 	total := 0
 	for scanner.Scan() {
         total += scores[scanner.Text()]
+	}
+
+	fmt.Println(total)
+}
+
+func PartTwo() {
+file, err := os.Open(data)
+	defer file.Close()
+	utils.Check(err, "Could not open data file")
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+    // A : Rock
+    // B : Paper
+    // C : Scissors
+    // X : Lose
+    // Y : Draw
+    // Z : Win
+
+    scores := map[string]map[string]int{
+        "A": {"X": 3, "Y": 4, "Z": 8},
+        "B": {"X": 1, "Y": 5, "Z": 9},
+        "C": {"X": 2, "Y": 6, "Z": 7},
+    }
+
+	total := 0
+	for scanner.Scan() {
+        code := strings.Split(scanner.Text(), " ")
+        opponentPlays, result := code[0], code[1]
+        total += scores[opponentPlays][result]
 	}
 
 	fmt.Println(total)
