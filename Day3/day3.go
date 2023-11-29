@@ -10,6 +10,8 @@ import (
 )
 
 var data = "Day3/day3_data.txt"
+var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz"
+var uppercaseLetters = strings.ToUpper(lowercaseLetters)
 
 func PartOne() {
 	file, err := os.Open(data)
@@ -18,9 +20,6 @@ func PartOne() {
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
-
-	lowercaseLetters := "abcdefghijklmnopqrstuvwxyz"
-	uppercaseLetters := strings.ToUpper(lowercaseLetters)
 
 	total := 0
 	for scanner.Scan() {
@@ -50,9 +49,6 @@ func PartTwo() {
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
-
-	lowercaseLetters := "abcdefghijklmnopqrstuvwxyz"
-	uppercaseLetters := strings.ToUpper(lowercaseLetters)
 
 	total := 0
 	packA, packB, packC := "", "", ""
