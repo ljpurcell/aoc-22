@@ -1,7 +1,7 @@
 package main
 
-import "aoc-22/Day2"
+import "aoc-22/Day3"
 
 func main() {
-    day2.PartTwo()
+    day3.PartOne()
 }
