@@ -1,7 +1,9 @@
 package utils
 
 import (
+	"bufio"
 	"log"
+	"os"
 )
 
 func Check(err error, msg string) {
@@ -9,6 +11,18 @@ func Check(err error, msg string) {
 		log.Printf(msg)
 		panic(err)
 	}
+}
+
+func GetFileLinesScanner(filename string) *bufio.Scanner {
+
+	file, err := os.Open(filename)
+	Check(err, "Could not open file")
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+    return scanner
 }
 
 func GetMinimums(data []int64) (int, int64) {
