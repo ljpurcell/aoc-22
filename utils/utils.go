@@ -13,21 +13,16 @@ func Check(err error, msg string) {
 	}
 }
 
-func GetFileLinesScanner(filename string) *bufio.Scanner {
-
-	file, err := os.Open(filename)
-	Check(err, "Could not open file")
-	defer file.Close()
-
+func GetFileLinesScanner(file *os.File) *bufio.Scanner {
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 
-    return scanner
+	return scanner
 }
 
 func GetMinimums(data []int64) (int, int64) {
 	var amount int64
-    var index int
+	var index int
 	if len(data) > 0 {
 		index = 0
 		amount = data[index]
@@ -43,7 +38,7 @@ func GetMinimums(data []int64) (int, int64) {
 }
 
 func Sum(data []int64) int64 {
-    var total int64
+	var total int64
 	for _, e := range data {
 		total += e
 	}
