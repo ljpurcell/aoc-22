@@ -1,10 +1,17 @@
 package utils
 
 import (
+	"aoc-22/data_structures"
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 )
+
+func CheckFile(err error) {
+    Check(err, fmt.Sprintf("Error opening file: %v", err))
+}
+
 
 func Check(err error, msg string) {
 	if err != nil {
@@ -44,4 +51,17 @@ func Sum(data []int64) int64 {
 	}
 
 	return total
+}
+
+func ContainsDuplicate(iterable []string) bool {
+    seen := data_structures.NewStack()
+    for _, element := range iterable {
+        if seen.Contains(element) {
+            return true
+        } else {
+            seen.Push(element)
+        }
+    }
+
+    return false
 }
