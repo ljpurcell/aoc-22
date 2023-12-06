@@ -38,4 +38,27 @@ func PartOne() {
 
 func PartTwo() {
 
+	file, err := os.Open(data)
+	utils.CheckFile(err)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanRunes)
+
+	items := []string{}
+	marker := 0
+	for i := 0; scanner.Scan(); i++ {
+		if len(items) == 14 && !utils.ContainsDuplicate(items) {
+			marker = i
+			break
+		}
+
+		if len(items) > 13 {
+			items = items[1:]
+		}
+
+		items = append(items, scanner.Text())
+	}
+
+	fmt.Println(marker)
 }
