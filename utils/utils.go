@@ -8,6 +8,13 @@ import (
 	"os"
 )
 
+func OpenFile(name string) *os.File {
+    file, err := os.Open(name)
+    CheckFile(err)
+
+    return file
+}
+
 func CheckFile(err error) {
     Check(err, fmt.Sprintf("Error opening file: %v", err))
 }
